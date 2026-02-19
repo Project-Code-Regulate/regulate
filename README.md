@@ -31,7 +31,7 @@ This project is currently in early development. Week 1 focuses on wireframes, UI
 - JavaScript
 
 ### Backend (Planned)
-- Python (Flask or FastAPI)
+- Python (FastAPI)
 
 ### Database (Planned)
 - SQLite or Firebase
