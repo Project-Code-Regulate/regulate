@@ -70,7 +70,7 @@ button.active {
     width: 60%;
     padding: 40px;
     font-size: 20px;
-    background-color: #d9d9d9;
+    background-color: #d9eef2;
     border: none;
     border-radius: 8px;
     color: black;
@@ -79,7 +79,7 @@ button.active {
 }
 
 .new-entry-btn:hover {
-    background-color: #c8c8c8;
+    background-color: #c2e4eb;
     border: none;
     border-radius: 8px;
     bottom: 0;
@@ -96,7 +96,7 @@ button.active {
 }
 
 .journal-entry {
-    background-color: #d9d9d9;
+    background-color: #d9eef2;
     border-radius: 8px;
     padding: 30px 20px;
     position: relative;
