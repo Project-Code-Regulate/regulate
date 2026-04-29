@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regulate</title>
+    <link rel="stylesheet" href="css/template.css">
+    <link rel="stylesheet" href="css/checkin.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html"><button>Home</button></a>
+        <a href="checkin.html"><button class="active">Check-In</button></a>
+        <a href="exercises.html"><button>Guided Exercises</button></a>
+        <a href="journal.html"><button>Journal</button></a>
+        <a href="charts.html"><button>Charts</button></a>
+    </nav>
+    <div class="container">
+        <h2>How Are You Doing Today User?</h2>
+        <div class="horizontal">
+            <span class="before">Pleasant</span>
+            <input type="range" min="0" max="100" value="50" id="pleasant">
+            <span class="after">Unpleasant</span>
+        </div>
+        <div class="horizontal">
+            <span class="before">Low Stress</span>
+            <input type="range" min="0" max="100" value="50" id="stress">
+            <span class="after">High Stress</span>
+        </div>
+        <h2>Journal Entry</h2>
+        <div class="horizontal">
+            <span class="before">Tags:</span>
+            <input type="text" autocorrect="on" placeholder="Add text here..." id="tag-text">
+            <input type="color" id="tag-color" value="#ccaa6a">
+            <button id="add-tag" onclick="addTag()">Add Tag</button>
+        </div>
+        <div class="horizontal" id="tag-area">
+        </div>
+        <textarea autocomplete="off" placeholder="Write here..." id="entry"></textarea>
+    </div>
+    <div class="horizontal">
+        <button id="submit-entry">Submit</button>
+        <button id="clear-entry">Clear</button>
+    </div>
+    <script src="js/checkin.js"></script>
+</body>
+</html>

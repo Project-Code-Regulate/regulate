@@ -1,0 +1,56 @@
+input[type="range"] { 
+    width: 400px; height: 8px; 
+    appearance: none; 
+    border-radius: 10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px; height: 18px; 
+    border: 1px solid grey; border-radius: 50%;
+    background-color: rgb(205,205,205);
+    cursor: pointer;
+}
+
+span { 
+    width: 100px; 
+    cursor: default; 
+}
+
+#pleasant { background: linear-gradient(to right, var(--green), var(--yellow), var(--red)); }
+#stress { background: linear-gradient(to right, var(--blue), var(--purple), var(--red)); }
+
+#submit-entry { background-color: var(--green); }
+#clear-entry { background-color: var(--red); }
+#add-tag { background-color: var(--purple); }
+
+#tag-text { 
+    font-family: var(--chiron); 
+    padding: 5px; 
+    border: 1px solid grey; border-radius: 5px; 
+    outline-color: var(--blue); 
+}
+
+input[type="color"] { 
+    appearance: none; 
+    width: 20px; height: 20px; 
+    border: none; border-radius: 50px; 
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+input[type="color"]::-webkit-color-swatch { border: none; border-radius: 50px; }
+
+.tag { 
+    width: max-content; 
+    border-radius: 10px; 
+    background-color: var(--yellow); 
+    padding: 5px; padding-inline: 10px; 
+}
+
+#entry { 
+    font-family: var(--chiron); 
+    background-color: var(--light-blue); 
+    border: 2px solid var(--blue); border-radius: 10px; 
+    width: 500px; height: 200px; 
+    padding: 10px; 
+}

@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@200..900&display=swap');
+:root {
+    --chiron: 'Chiron GoRound TC', sans-serif;
+    --purple: #a882ab; 
+    --light-blue: #cce6ec; 
+    --blue: #5aaabb;
+    --light-green: #a2d1a8; 
+    --green: #60a067; 
+    --yellow: #ccaa6a; 
+    --red: #be6040;
+}
+
+* { padding: 0; margin: 0; }
+
+body { 
+    margin: 5px; 
+    background-color: white; 
+    font-family: var(--chiron); 
+}
+
+.before { text-align: right; }
+.after { text-align: left; }
+
+.horizontal { 
+    display: flex; 
+    gap: 10px; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+button {
+    font-family: var(--chiron); 
+    font-size: 20px; 
+    padding: 5px 10px;
+    border: none; border-radius: 10px; 
+    color: white; 
+    cursor: pointer;
+}
+
+nav {
+    margin-top: 30px; 
+    border-bottom: 3px solid var(--blue);
+    display: flex; 
+    align-items: flex-end;
+}
+
+nav button {
+    color: grey; 
+    background-color: white;
+    border: 3px solid transparent; border-radius: 5px 5px 0 0; 
+    position: relative;
+}
+
+.active {
+    color: var(--purple); 
+    border: 3px solid var(--blue);
+    border-bottom: 3px solid white;
+    bottom: -3px;
+}
+
+nav button:hover:not(.active) {
+    border: 3px solid var(--blue);
+    bottom: -3px;
+}
+
+.container { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    padding: 50px; 
+    gap: 20px; 
+}
+
+h2 { 
+    font-size: 40px; 
+    background: linear-gradient(to right, var(--blue), var(--purple), var(--blue)); 
+    background-size: 200% auto;
+    background-clip: text; 
+    color: transparent; 
+    animation: colorwave 3s ease-in-out infinite alternate;
+}
+
+@keyframes colorwave {
+    0% { background-position: 0% center; }
+    100% { background-position: 100% center; }
+}
