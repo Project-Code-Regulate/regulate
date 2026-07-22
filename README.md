@@ -1,4 +1,5 @@
 # Welcome to Regulate!
+A project being run under Project: Code UIUC, an RSO which allows students to lead and develop projects with guidance and outreach on campus. 
 
 ## Mission
 
@@ -136,7 +137,7 @@ Planned:
 - FastAPI backend
 - SQLite integration
 
-Current Team Roles Needed:
+Current Team Roles Needed (UIUC students only): 
 - Frontend Developers
 - Backend Developers
 - UI/UX Designers
