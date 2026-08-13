@@ -227,13 +227,13 @@ Do **not** commit directly to `main`.
 Create a feature branch for all work:
 
 ```
-git checkout -b feature/feature-name
+git checkout -b feature/#-feature-name
 ```
 
 Example:
 
 ```
-git checkout -b feature/checkin-ui
+git checkout -b feature/14-initialize-fastapi-backend
 ```
 
 After making changes:
