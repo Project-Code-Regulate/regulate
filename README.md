@@ -53,6 +53,7 @@ Access and update the [Implementation Notes](https://docs.google.com/document/d/
 ```
 regulate/
 ├── README.md
+├── .gitignore
 ├── html/
 │   ├── index.html
 │   ├── checkin.html
@@ -64,9 +65,13 @@ regulate/
 │   ├── template.css
 │   ├── checkin.css
 │   └── exercises.css
-└── js/
-    ├── checkin.js
-    └── exercises.js
+├── js/
+|   ├── checkin.js
+|   └── exercises.js
+│   
+└── backend/
+    ├── main.py
+    └── requirements.txt
 ```
 
 ### Directory Overview
@@ -76,6 +81,8 @@ regulate/
 | `html/` | Frontend pages |
 | `css/` | Stylesheets for each page |
 | `js/` | Client-side JavaScript |
+| `.gitignore` | Specifies files and directories that Git should not track |
+| `backend/` | Folder for all backend work |
 | `README.md` | Project documentation |
 
 
@@ -88,6 +95,7 @@ regulate/
 | `exercises.html` | Guided breathing and grounding exercises |
 | `checkin.js` | Check-in page functionality |
 | `exercises.js` | Exercise carousel functionality |
+| `main.py` | FastAPI application entry point |
 
 ---
 ## Planned Future Structure
@@ -122,7 +130,7 @@ regulate/
 | `routes/charts.py` | Charts and analytics endpoints |
 ---
 
-## Current Status (Summer 2026)
+## Current Status
 
 Completed:
 - Project structure established
@@ -130,11 +138,14 @@ Completed:
 - Guided Exercises page
 - Project management board
 - Documentation and onboarding notes
+- Initial FastAPI backend setup
 
 Planned:
 - Journal page
 - Charts page
-- FastAPI backend
+- Check-In API endpoint
+- Journal API endpoint
+- Charts API endpoint
 - SQLite integration
 
 Current Team Roles Needed (UIUC students only): 
@@ -174,7 +185,36 @@ in your terminal. Then enter this link in your browser:
 http://localhost:8000/html/index.html
 ```
 
-Backend setup instructions will be added in later phases.
+### 4. Backend Setup
+
+Navigate to the backend directory:
+
+```bash
+cd backend
+```
+
+Create and activate a Python virtual environment:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Start the FastAPI development server:
+
+```bash
+fastapi dev main.py
+```
+
+The API will be available at `http://127.0.0.1:8000`.
+
+Interactive API documentation is available at `http://127.0.0.1:8000/docs`.
 
 ---
 
@@ -187,13 +227,13 @@ Do **not** commit directly to `main`.
 Create a feature branch for all work:
 
 ```
-git checkout -b feature/feature-name
+git checkout -b feature/#-feature-name
 ```
 
 Example:
 
 ```
-git checkout -b feature/checkin-ui
+git checkout -b feature/14-initialize-fastapi-backend
 ```
 
 After making changes:
