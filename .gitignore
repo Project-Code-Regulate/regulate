@@ -6,4 +6,5 @@ __pycache__/
 # macOS
 .DS_Store
 
+# Database
 *.db

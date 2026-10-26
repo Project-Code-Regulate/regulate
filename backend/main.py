@@ -1,41 +1,19 @@
-import json
-import sqlite3
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 
-app = FastAPI()
+from database import init_db
 
-DB_PATH = "regulate.db"
 
-def get_connection():
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    return conn
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_db()
+    yield
 
-with get_connection() as conn:
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS journal_entries (
-            id         INTEGER PRIMARY KEY AUTOINCREMENT,
-            created_at TEXT NOT NULL DEFAULT (datetime('now')),
-            mood       INTEGER NOT NULL,
-            stress     INTEGER NOT NULL,
-            text       TEXT NOT NULL DEFAULT '',
-            tags       TEXT NOT NULL DEFAULT '[]'
-        )
-    """)
+
+app = FastAPI(lifespan=lifespan)
+
 
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
-
-@app.get("/journal")
-def get_journal_entries():
-    with get_connection() as conn:
-        rows = conn.execute(
-            "SELECT * FROM journal_entries ORDER BY created_at DESC"
-        ).fetchall()
-    entries = []
-    for row in rows:
-        entry = dict(row)
-        entry["tags"] = json.loads(entry["tags"])
-        entries.append(entry)
-    return entries
