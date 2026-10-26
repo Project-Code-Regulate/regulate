@@ -1,16 +1,29 @@
-import json
-from main import get_connection
+from database import get_connection, init_db
 
-with get_connection() as conn:
+init_db() 
+
+conn = get_connection()
+
+cursor = conn.execute(
+    "INSERT INTO entries (user_id, mood_score, stress_score, journal_text) VALUES (?, ?, ?, ?)",
+    (1, 35, 70, "Midterm tomorrow, stressed."),
+)
+entry_id = cursor.lastrowid
+
+for name, color in [("school", "#5aaabb"), ("exams", "#be6040")]:
     conn.execute(
-        "INSERT INTO journal_entries (mood, stress, text, tags) VALUES (?, ?, ?, ?)",
-        (65, 70, "Midterm tomorrow, stressed.", json.dumps(["school", "exams"])),
+        "INSERT OR IGNORE INTO tags (user_id, name, color) VALUES (?, ?, ?)",
+        (1, name, color),
     )
+    tag_id = conn.execute(
+        "SELECT tag_id FROM tags WHERE user_id = ? AND name = ?",
+        (1, name),
+    ).fetchone()["tag_id"]
     conn.execute(
-        "INSERT INTO journal_entries (mood, stress, text, tags) VALUES (?, ?, ?, ?)",
-        (15, 25, "Dinner with friends, felt relaxed.", json.dumps(["friends"])),
+        "INSERT INTO entry_tags (entry_id, tag_id) VALUES (?, ?)",
+        (entry_id, tag_id),
     )
 
 conn.commit()
 conn.close()
-print("Seeded!")
+print("Added a test entry")
