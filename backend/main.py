@@ -10,9 +10,9 @@ TEMP_USER_ID = 1
 
 
 class CheckInInput(BaseModel):
-    mood: int = Field(ge=0, le=100)
-    stress: int = Field(ge=0, le=100)
-    text: str = ""
+    mood_score: int = Field(ge=0, le=100)
+    stress_score: int = Field(ge=0, le=100)
+    journal_text: str = ""
     tags: list[str] = Field(default_factory=list)
 
 
@@ -30,6 +30,36 @@ def health_check():
     return {"status": "ok"}
 
 
+@app.get("/journal")
+def get_journal_entries(db=Depends(get_db)):
+    entry_rows = db.execute(
+        """
+        SELECT entry_id, mood_score, stress_score, journal_text, created_at
+        FROM entries
+        WHERE user_id = ?
+        ORDER BY created_at DESC, entry_id DESC
+        """,
+        (TEMP_USER_ID,),
+    ).fetchall()
+
+    entries = []
+    for row in entry_rows:
+        entry = dict(row)
+        tag_rows = db.execute(
+            """
+            SELECT tags.name, tags.color
+            FROM tags
+            JOIN entry_tags ON entry_tags.tag_id = tags.tag_id
+            WHERE entry_tags.entry_id = ?
+            """,
+            (row["entry_id"],),
+        ).fetchall()
+        entry["tags"] = [dict(tag) for tag in tag_rows]
+        entries.append(entry)
+
+    return entries
+
+
 @app.post("/checkin", status_code=201)
 def submit_checkin(checkin: CheckInInput, db=Depends(get_db)):
     cursor = db.execute(
@@ -37,7 +67,12 @@ def submit_checkin(checkin: CheckInInput, db=Depends(get_db)):
         INSERT INTO entries (user_id, mood_score, stress_score, journal_text)
         VALUES (?, ?, ?, ?)
         """,
-        (TEMP_USER_ID, checkin.mood, checkin.stress, checkin.text),
+        (
+            TEMP_USER_ID,
+            checkin.mood_score,
+            checkin.stress_score,
+            checkin.journal_text,
+        ),
     )
     entry_id = cursor.lastrowid
 
