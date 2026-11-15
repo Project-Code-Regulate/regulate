@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regulate - Journal</title>
+    <title>Regulate</title>
     <link rel="stylesheet" href="../css/template.css">
-    <link rel="stylesheet" href="../css/checkin.css">
+    <link rel="stylesheet" href="../css/journal.css">
 </head>
 <body>
+    <!-- Navigation -->
     <nav>
-        <a href="checkin.html">CheckInPage</a>
-        <a href="exercises.html">ExercisesPage</a>
-        <a href="index.html">HomePage</a>
-        <a href="journal.html">JournalsPage</a>
+        <a href="index.html"><button>Home</button></a>
+        <a href="checkin.html"><button>Check-In</button></a>
+        <a href="exercises.html"><button>Guided Exercises</button></a>
+        <a href="journal.html"><button class="active">Journal</button></a>
+        <a href="charts.html"><button>Charts</button></a>
     </nav>
-    <h1>Journals</h1>
-    <div class="sort-controls">
-        <label for="tags">Sort by tag</label>
-        <select id="tags">
-            <option value="">Select...</option>
-            <option>Excited</option>
-            <option>Anxious</option>
-        </select>
-        <label for="date">Sort by date</label>
-        <select id="date">
-            <option value="">Select...</option>
-            <option>Oldest</option>
-            <option>Most Recent</option>
-        </select>
-    </div>
+    <div class="Journals">
+        <h1>Journals</h1>
+        <div class="sort-controls">
+            <label for="tags">Sort by tag</label>
+            <select id="tags">
+                <option value="">Select...</option>
+                <option>Excited</option>
+                <option>Anxious</option>
+            </select>
+            <label for="date">Sort by date</label>
+            <select id="date">
+                <option value="">Select...</option>
+                <option>Oldest</option>
+                <option>Most Recent</option>
+            </select>
+        </div>
     <div class="journal-card">
         <span>Anxious</span>
         <span>10/2/26</span>
@@ -46,6 +49,7 @@
         <span>Data</span>
         <p>Journal Text</p>
         <a href="#">more&gt;</a>
+    </div>
     </div>
 </body>
 </html>
