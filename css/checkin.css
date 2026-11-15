@@ -17,7 +17,7 @@ span {
     cursor: default; 
 }
 
-#pleasant { background: linear-gradient(to right, var(--green), var(--yellow), var(--red)); }
+#pleasant { background: linear-gradient(to right, var(--red), var(--yellow), var(--green)); }
 #stress { background: linear-gradient(to right, var(--blue), var(--purple), var(--red)); }
 
 #submit-entry { background-color: var(--green); }

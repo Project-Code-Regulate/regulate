@@ -4,19 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Regulate</title>
-    <link rel="stylesheet" href="../css/template.css">
+    <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
     <!-- Navigation -->
     <nav>
         <a href="index.html"><button class="active">Home</button></a>
         <a href="checkin.html"><button>Check-In</button></a>
-         <a href="exercises.html"><button>Guided Exercises</button></a>
+        <a href="exercises.html"><button>Guided Exercises</button></a>
         <a href="journal.html"><button>Journal</button></a>
         <a href="charts.html"><button>Charts</button></a>
     </nav>
-    <div class="container">   
-        <h2>Welcome to Regulate!</h2>
+
+    <!-- Home Page -->
+    <div id="page-home" class="container page">
+        <h2>Welcome to Regulate</h2>
+        <p class="mission">A web application designed to support daily stress and mood awareness through quick check-ins, guided regulation exercises, reflections, and simple trend visualization.</p>
+        <div class="home-buttons">
+            <a href="checkin.html"><button class="home-nav-btn">Check-In</button></a>
+            <a href="exercises.html"><button class="home-nav-btn">Guided Exercises</button></a>
+            <a href="journal.html"><button class="home-nav-btn">Journal</button></a>
+            <a href="charts.html"><button class="home-nav-btn">Charts</button></a>
     </div>
+    </div>
+
+    <!-- Check-In Page -->
+    <div id="page-checkin" class="container page" style="display:none;">
+        <h2>Check-In</h2>
+    </div>
+
+    <!-- Guided Exercises Page -->
+    <div id="page-exercises" class="container page" style="display:none;">
+        <h2>Guided Exercises</h2>
+    </div>
+
+    <!-- Journal Page -->
+    <div id="page-journal" class="container page" style="display:none;">
+
+        <!-- List View -->
+        <div id="journal-list-view" style="width:100%; display:flex; flex-direction:column; align-items:center; gap:20px;">
+            <button class="new-entry-btn" onclick="showJournalForm()">Create new journal entry</button>
+            <div class="journal-list" id="journal-list"></div>
+        </div>
+
+        <!-- New Entry Form -->
+        <div id="journal-form-view" style="display:none; flex-direction:column; align-items:center; gap:20px; width:100%;">
+            <h2>New Journal Entry</h2>
+            <textarea class="journal-textarea" id="entryText" placeholder="Write here..."></textarea>
+            <div class="checkin-actions">
+                <button class="submit-btn" onclick="submitEntry()">Submit</button>
+                <button class="clear-btn" onclick="document.getElementById('entryText').value=''">Clear</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Charts Page -->
+    <div id="page-charts" class="container page" style="display:none;">
+        <h2>Charts</h2>
+    </div>
+
+    <script>
+        function showPageFromHome(name) {
+            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById('page-' + name).style.display = 'flex';
+            document.querySelector(`nav button[onclick="showPage('${name}')"]`).classList.add('active');
+        }
+
+        function showPage(name) {
+            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById('page-' + name).style.display = 'flex';
+            event.target.classList.add('active');
+        }
+
+        function showJournalForm() {
+            document.getElementById('journal-list-view').style.display = 'none';
+            document.getElementById('journal-form-view').style.display = 'flex';
+        }
+
+        function submitEntry() {
+            const text = document.getElementById('entryText').value.trim();
+            if (!text) return;
+
+            const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+            const preview = text.length > 80 ? text.substring(0, 80) + '...' : text;
+
+            const entry = document.createElement('div');
+            entry.className = 'journal-entry';
+            entry.innerHTML = `<span class="entry-date">${date}</span><p class="entry-preview">${preview}</p>`;
+            document.getElementById('journal-list').prepend(entry);
+
+            document.getElementById('entryText').value = '';
+            document.getElementById('journal-form-view').style.display = 'none';
+            document.getElementById('journal-list-view').style.display = 'flex';
+        }
+    </script>
 </body>
 </html>
