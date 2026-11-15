@@ -11,10 +11,25 @@
     <nav>
         <a href="checkin.html">CheckInPage</a>
         <a href="exercises.html">ExercisesPage</a>
-        <a href="index.html">IndexPage</a>
+        <a href="index.html">HomePage</a>
+        <a href="journal.html">JournalsPage</a>
     </nav>
     <h1>Journals</h1>
-    <div class = "journal-card">
+    <div class="sort-controls">
+        <label for="tags">Sort by tag</label>
+        <select id="tags">
+            <option value="">Select...</option>
+            <option>Excited</option>
+            <option>Anxious</option>
+        </select>
+        <label for="date">Sort by date</label>
+        <select id="date">
+            <option value="">Select...</option>
+            <option>Oldest</option>
+            <option>Most Recent</option>
+        </select>
+    </div>
+    <div class="journal-card">
         <span>Anxious</span>
         <span>10/2/26</span>
         <p>Journal Text</p>
