@@ -1,0 +1,40 @@
+
+.sort-controls {
+    display : flex;
+    flex-direction: column;
+    margin-bottom : 16px;
+}
+
+.journal-layout {
+    display: flex;
+    gap: 24px;
+    justify-content: center; 
+}
+
+.entries {
+    width: 600px; 
+}
+
+.journal-card {
+    background-color: rgb(228, 228, 228);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 16px;
+}
+
+.mood {
+    border-radius: 20px;
+    padding: 2px;
+}
+
+.axious {
+    background-color: var(--red);
+}
+
+.excited {
+    background-color: var(--yellow);
+}
+
+.happy {
+    background-color: var(--green); 
+}

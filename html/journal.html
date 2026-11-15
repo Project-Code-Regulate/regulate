@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regulate</title>
+    <link rel="stylesheet" href="../css/template.css">
+    <link rel="stylesheet" href="../css/journal.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html"><button>Home</button></a>
+        <a href="checkin.html"><button>Check-In</button></a>
+        <a href="exercises.html"><button>Guided Exercises</button></a>
+        <a href="journal.html"><button class="active">Journal</button></a>
+        <a href="charts.html"><button>Charts</button></a>
+    </nav>
+    <div class="container">
+    <h2>Journals</h2>
+    <div class="journal-layout">
+        <div class="entries">
+             <div class="journal-card">
+                <span class="mood axious">Anxious</span>
+                <span>10/2/26</span>
+                <p>Journal Text</p>
+                <a href="#">more&gt;</a>
+            </div>
+            <div class = "journal-card">
+                <span class="mood excited">Excited</span>
+    
+                <span>11/23/26</span>
+                <p>Journal Text</p>
+                <a href="#">more&gt;</a>
+            </div>
+            <div class = "journal-card">
+                <span class="mood happy">Happy</span>
+                <span>Date</span>
+                <p>Journal Text</p>
+                <a href="#">more&gt;</a>
+            </div>
+        </div>
+        <div class="sort-controls">
+            <label for="tags">Sort by tag</label>
+            <select id="tags">
+                <option value="">Select...</option>
+                <option>Excited</option>
+                <option>Anxious</option>
+            </select>
+            <label for="date">Sort by date</label>
+            <select id="date">
+                <option value="">Select...</option>
+                <option>Oldest</option>
+                <option>Most Recent</option>
+            </select>
+        </div>
+    </div>
+</div>
+</body>
+</html>
