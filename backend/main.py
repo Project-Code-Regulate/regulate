@@ -1,9 +1,19 @@
 from contextlib import asynccontextmanager
-from fastapi import Depends
-from database import get_db
-from fastapi import FastAPI
 
-from database import init_db
+from fastapi import Depends, FastAPI
+from pydantic import BaseModel, Field
+
+from database import get_db, init_db
+
+
+TEMP_USER_ID = 1
+
+
+class CheckInInput(BaseModel):
+    mood_score: int = Field(ge=0, le=100)
+    stress_score: int = Field(ge=0, le=100)
+    journal_text: str = ""
+    tags: list[str] = Field(default_factory=list)
 
 
 @asynccontextmanager
@@ -11,7 +21,6 @@ async def lifespan(app: FastAPI):
     init_db()
     yield
 
-TEMP_USER_ID = 1
 
 app = FastAPI(lifespan=lifespan)
 
@@ -19,6 +28,7 @@ app = FastAPI(lifespan=lifespan)
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
+
 
 @app.get("/journal")
 def get_journal_entries(db=Depends(get_db)):
@@ -48,3 +58,42 @@ def get_journal_entries(db=Depends(get_db)):
         entries.append(entry)
 
     return entries
+
+
+@app.post("/checkin", status_code=201)
+def submit_checkin(checkin: CheckInInput, db=Depends(get_db)):
+    cursor = db.execute(
+        """
+        INSERT INTO entries (user_id, mood_score, stress_score, journal_text)
+        VALUES (?, ?, ?, ?)
+        """,
+        (
+            TEMP_USER_ID,
+            checkin.mood_score,
+            checkin.stress_score,
+            checkin.journal_text,
+        ),
+    )
+    entry_id = cursor.lastrowid
+
+    for tag_name in checkin.tags:
+        tag_name = tag_name.strip()
+        if not tag_name:
+            continue
+
+        db.execute(
+            "INSERT OR IGNORE INTO tags (user_id, name) VALUES (?, ?)",
+            (TEMP_USER_ID, tag_name),
+        )
+        tag = db.execute(
+            "SELECT tag_id FROM tags WHERE user_id = ? AND name = ?",
+            (TEMP_USER_ID, tag_name),
+        ).fetchone()
+
+        db.execute(
+            "INSERT OR IGNORE INTO entry_tags (entry_id, tag_id) VALUES (?, ?)",
+            (entry_id, tag["tag_id"]),
+        )
+
+    db.commit()
+    return {"entry_id": entry_id, "status": "created"}
